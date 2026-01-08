@@ -106,6 +106,8 @@ let gameState = {
   activeColor: null,
   turnCount: 0,
   minimized: false,
+  playerNeedsUno: false, // Player needs to call Uno
+  playerCalledUno: false, // Player called Uno this round
 };
 
 // ============================================================================
@@ -187,15 +189,30 @@ function playCard(card, chosenColor = null) {
     gameState.activeColor = card.color;
   }
   
+  // Check for Uno call (1 card left)
+  if (gameState.playerHand.length === 1) {
+    gameState.playerNeedsUno = true;
+    gameState.playerCalledUno = false;
+    toastr.warning('You have ONE card! Click "UNO!" button!', 'Uno!');
+  } else {
+    // Reset uno state if player has more than 1 card
+    gameState.playerNeedsUno = false;
+    gameState.playerCalledUno = false;
+  }
+  
+  // Check for win
   if (gameState.playerHand.length === 0) {
     toastr.success('YOU WIN! 🎉', 'Uno');
     endGame('player_win');
     return;
   }
   
+  // Handle special cards - this may change currentTurn
+  const keepsTurn = card.value === 'Skip' || card.value === 'Reverse';
   handleCardEffect(card, 'player');
   
-  if (gameState.currentTurn === 'player') {
+  // Only change turn if it wasn't a skip/reverse card
+  if (!keepsTurn) {
     gameState.currentTurn = 'ai';
   }
   
@@ -223,11 +240,14 @@ function handleCardEffect(card, playedBy) {
   const opponent = playedBy === 'player' ? 'ai' : 'player';
   
   if (card.value === 'Skip') {
+    // Skip opponent's turn - current player goes again
     gameState.currentTurn = playedBy;
     toastr.info(playedBy === 'player' ? 'AI turn skipped!' : 'Your turn skipped!');
   } else if (card.value === 'Reverse') {
+    // In 2-player, Reverse acts like Skip
     gameState.direction *= -1;
-    toastr.info('Direction reversed!');
+    gameState.currentTurn = playedBy; // Current player goes again
+    toastr.info('Reverse! You go again~');
   } else if (card.value === '+2') {
     const drawn = gameState.deck.draw(2);
     if (opponent === 'ai') {
@@ -405,9 +425,17 @@ function processAIChoice(choice) {
     return true;
   }
   
+  // Check if AI should call Uno (1 card left)
+  if (gameState.aiHand.length === 1) {
+    toastr.info('AI calls UNO!', 'Uno');
+  }
+  
+  // Handle effects - may change turn
+  const keepsTurn = playedCard.value === 'Skip' || playedCard.value === 'Reverse';
   handleCardEffect(playedCard, 'ai');
   
-  if (gameState.currentTurn === 'ai') {
+  // Only change turn if it wasn't a skip/reverse
+  if (!keepsTurn) {
     gameState.currentTurn = 'player';
   }
   
@@ -462,24 +490,24 @@ function generateGamePrompt() {
 YOUR CARDS: ${aiHandStr}
 TOP CARD: ${formatCard(topCard)}
 ACTIVE COLOR: ${gameState.activeColor || topCard?.color}
-VALID PLAYS: ${validPlays.length > 0 ? validPlays.join(', ') : 'NONE - must draw'}
+YOUR VALID PLAYS: ${validPlays.length > 0 ? validPlays.join(', ') : 'NONE - must draw'}
 
-⚠️ IMPORTANT: Include your choice in EXACTLY this format:
+CARD RULES:
+- Skip/Reverse = Opponent loses their turn (you go again!)
+- +2 = Opponent draws 2 cards
+- Wild = Pick any color
+- Wild +4 = Pick color + opponent draws 4
+
+⚠️ You MUST include your choice in EXACTLY this format:
 <game_state>
 <ai_selected>CARD NAME HERE</ai_selected>
 </game_state>
 
-Example to play Red 5:
-<game_state>
-<ai_selected>Red 5</ai_selected>
-</game_state>
+Example: <game_state><ai_selected>Red 5</ai_selected></game_state>
+Or to draw: <game_state><ai_selected>draw</ai_selected></game_state>
 
-Or to draw:
-<game_state>
-<ai_selected>draw</ai_selected>
-</game_state>
-
-These tags are hidden from the player. Stay in character!
+If you have 1 card left, say "UNO!" in your roleplay!
+Stay in character! The tags are hidden from the player.
 [END UNO]`;
 }
 
@@ -543,6 +571,13 @@ function renderGameUI() {
           AI: ${gameState.aiHand.length} | Deck: ${gameState.deck.remaining}
         </div>
       </div>
+      
+      ${gameState.playerNeedsUno && !gameState.playerCalledUno ? `
+        <div class="cg-uno-alert">
+          <button class="cg-btn cg-uno-btn" onclick="window.cardGameCallUno()">🎴 UNO!</button>
+          <span>Call it or draw 2!</span>
+        </div>
+      ` : ''}
       
       ${isAITurn ? `
         <div class="cg-ai-help">
@@ -698,6 +733,31 @@ window.cardGameToggleMinimize = function() {
     panel.classList.toggle('cg-minimized');
   }
 };
+
+window.cardGameCallUno = function() {
+  if (!gameState.active) return;
+  
+  if (gameState.playerNeedsUno) {
+    gameState.playerCalledUno = true;
+    gameState.playerNeedsUno = false;
+    toastr.success('UNO! 🎴', 'Called it!');
+    renderGameUI();
+    saveGameState();
+  }
+};
+
+// Check if player forgot to call Uno (called when turn changes to player)
+function checkUnoForgotten() {
+  if (gameState.playerNeedsUno && !gameState.playerCalledUno && gameState.playerHand.length === 1) {
+    // Player forgot! Penalty: draw 2
+    toastr.error('You forgot to call UNO! Draw 2 cards!', 'Penalty!');
+    const drawn = gameState.deck.draw(2);
+    gameState.playerHand.push(...drawn);
+    gameState.playerNeedsUno = false;
+    renderGameUI();
+    saveGameState();
+  }
+}
 
 // ============================================================================
 // SETTINGS
