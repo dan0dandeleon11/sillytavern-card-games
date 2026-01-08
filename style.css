@@ -308,6 +308,37 @@
   color: #a5b4fc;
 }
 
+/* UNO call alert */
+.cg-uno-alert {
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  animation: uno-pulse 0.5s ease infinite alternate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cg-uno-alert span {
+  font-size: 0.85em;
+  color: white;
+}
+
+.cg-uno-btn {
+  background: white !important;
+  color: #ef4444 !important;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 8px 20px !important;
+}
+
+@keyframes uno-pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.02); box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
   #card-game-panel {
