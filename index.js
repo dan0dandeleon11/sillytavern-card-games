@@ -105,6 +105,7 @@ let gameState = {
   direction: 1,
   activeColor: null,
   turnCount: 0,
+  minimized: false,
 };
 
 // ============================================================================
@@ -512,14 +513,23 @@ function renderGameUI() {
     document.body.appendChild(panel);
   }
   
+  // Check if minimized
+  const isMinimized = gameState.minimized;
+  
   const topCard = gameState.deck.topDiscard;
   const validPlays = getValidPlays();
   const isAITurn = gameState.currentTurn === 'ai';
+  const turnIndicator = isAITurn ? '⏳' : '👉';
   
   panel.innerHTML = `
     <div class="cg-header">
-      <span class="cg-title">🎴 Uno</span>
+      <span class="cg-title">
+        <span>🎴</span>
+        <span class="cg-title-text">Uno</span>
+        <span class="cg-badge">${turnIndicator} ${gameState.playerHand.length}</span>
+      </span>
       <div class="cg-controls">
+        <button class="cg-btn cg-minimize" onclick="window.cardGameToggleMinimize()" title="${isMinimized ? 'Expand' : 'Minimize'}">${isMinimized ? '▲' : '▼'}</button>
         <button class="cg-btn" onclick="window.cardGameDrawCard()" ${isAITurn ? 'disabled' : ''}>Draw</button>
         <button class="cg-btn cg-close" onclick="window.cardGameEnd()">✕</button>
       </div>
@@ -536,9 +546,9 @@ function renderGameUI() {
       
       ${isAITurn ? `
         <div class="cg-ai-help">
-          <p>After AI responds, click:</p>
-          <button class="cg-btn cg-process" onclick="window.cardGameProcessAI()">🔄 Process AI Move</button>
-          <button class="cg-btn cg-skip" onclick="window.cardGameSkipAI()">⏭️ Skip (AI draws)</button>
+          <p>After AI responds:</p>
+          <button class="cg-btn cg-process" onclick="window.cardGameProcessAI()">🔄 Process</button>
+          <button class="cg-btn cg-skip" onclick="window.cardGameSkipAI()">⏭️ Skip</button>
         </div>
       ` : ''}
       
@@ -562,6 +572,13 @@ function renderGameUI() {
   `;
   
   panel.style.display = 'block';
+  
+  // Apply minimized state
+  if (gameState.minimized) {
+    panel.classList.add('cg-minimized');
+  } else {
+    panel.classList.remove('cg-minimized');
+  }
 }
 
 function hideGameUI() {
@@ -672,6 +689,14 @@ window.cardGameSkipAI = function() {
   toastr.info('AI skipped, drew a card');
   renderGameUI();
   saveGameState();
+};
+window.cardGameToggleMinimize = function() {
+  const panel = document.getElementById('card-game-panel');
+  if (panel) {
+    const isCurrentlyMinimized = panel.classList.contains('cg-minimized');
+    gameState.minimized = !isCurrentlyMinimized;
+    panel.classList.toggle('cg-minimized');
+  }
 };
 
 // ============================================================================
