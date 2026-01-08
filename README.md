@@ -14,7 +14,7 @@ Play card games like **Uno**, **Cards Against Humanity**, and **Exploding Kitten
 
 1. Open SillyTavern
 2. Go to **Extensions** → **Install Extension**
-3. Paste: `https://github.com/yourusername/card-games-extension`
+3. Paste: `https://github.com/dan0dandeleon11/sillytavern-card-games`
 4. Click Install
 
 Or manually copy the extension folder to:
