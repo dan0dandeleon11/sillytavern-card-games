@@ -2,7 +2,7 @@
  * SillyTavern Card Games Extension
  * Play card games with your AI companions
  * 
- * @author Lei & Caleb
+ * @author Dan & Caleb
  * @version 0.3.0
  */
 
