@@ -1,0 +1,153 @@
+<div id="card-games-settings">
+  <h4>🎴 Card Games Settings</h4>
+  
+  <div class="setting-row">
+    <span class="setting-label">Enable Card Games</span>
+    <input type="checkbox" id="cg-enabled" checked>
+  </div>
+  
+  <div class="setting-row">
+    <span class="setting-label">Panel Position</span>
+    <select id="cg-position">
+      <option value="right">Right</option>
+      <option value="left">Left</option>
+      <option value="bottom">Bottom</option>
+    </select>
+  </div>
+  
+  <div class="setting-row">
+    <span class="setting-label">Auto-detect game keywords</span>
+    <input type="checkbox" id="cg-auto-start" checked>
+  </div>
+  
+  <div class="setting-row">
+    <span class="setting-label">Show AI reasoning (debug)</span>
+    <input type="checkbox" id="cg-show-thinking">
+  </div>
+  
+  <div class="setting-row">
+    <span class="setting-label">Animation Speed</span>
+    <select id="cg-animation-speed">
+      <option value="slow">Slow</option>
+      <option value="normal" selected>Normal</option>
+      <option value="fast">Fast</option>
+    </select>
+  </div>
+  
+  <hr>
+  
+  <h4>Quick Actions</h4>
+  
+  <div class="setting-row">
+    <button class="menu_button" id="cg-start-uno">
+      🎴 Start Uno Game
+    </button>
+  </div>
+  
+  <div class="setting-row">
+    <button class="menu_button" id="cg-start-cah">
+      🃏 Start Cards Against Humanity
+    </button>
+  </div>
+  
+  <div class="setting-row">
+    <button class="menu_button" id="cg-end-game">
+      ❌ End Current Game
+    </button>
+  </div>
+  
+  <hr>
+  
+  <div class="setting-row">
+    <span class="setting-label" style="font-size: 12px; opacity: 0.7;">
+      Tip: Say "let's play uno" to auto-start a game!
+    </span>
+  </div>
+</div>
+
+<script>
+  // Settings panel initialization
+  (function() {
+    const MODULE_NAME = 'card_games';
+    
+    function getSettings() {
+      const { extensionSettings } = SillyTavern.getContext();
+      return extensionSettings[MODULE_NAME] || {};
+    }
+    
+    function saveSettings() {
+      const { saveSettingsDebounced } = SillyTavern.getContext();
+      saveSettingsDebounced();
+    }
+    
+    // Load current settings into UI
+    function loadSettingsUI() {
+      const settings = getSettings();
+      
+      document.getElementById('cg-enabled').checked = settings.enabled !== false;
+      document.getElementById('cg-position').value = settings.uiPosition || 'right';
+      document.getElementById('cg-auto-start').checked = settings.autoStartOnKeyword !== false;
+      document.getElementById('cg-show-thinking').checked = settings.showAIThinking || false;
+      document.getElementById('cg-animation-speed').value = settings.animationSpeed || 'normal';
+    }
+    
+    // Bind change handlers
+    function bindHandlers() {
+      const settings = getSettings();
+      
+      document.getElementById('cg-enabled').addEventListener('change', (e) => {
+        settings.enabled = e.target.checked;
+        saveSettings();
+      });
+      
+      document.getElementById('cg-position').addEventListener('change', (e) => {
+        settings.uiPosition = e.target.value;
+        saveSettings();
+        // Would need to update UI position here
+      });
+      
+      document.getElementById('cg-auto-start').addEventListener('change', (e) => {
+        settings.autoStartOnKeyword = e.target.checked;
+        saveSettings();
+      });
+      
+      document.getElementById('cg-show-thinking').addEventListener('change', (e) => {
+        settings.showAIThinking = e.target.checked;
+        saveSettings();
+      });
+      
+      document.getElementById('cg-animation-speed').addEventListener('change', (e) => {
+        settings.animationSpeed = e.target.value;
+        saveSettings();
+      });
+      
+      // Quick action buttons
+      document.getElementById('cg-start-uno').addEventListener('click', () => {
+        // Trigger slash command
+        const { executeSlashCommands } = SillyTavern.getContext();
+        executeSlashCommands('/cardgame start uno');
+      });
+      
+      document.getElementById('cg-start-cah').addEventListener('click', () => {
+        const { executeSlashCommands } = SillyTavern.getContext();
+        executeSlashCommands('/cardgame start cah');
+      });
+      
+      document.getElementById('cg-end-game').addEventListener('click', () => {
+        const { executeSlashCommands } = SillyTavern.getContext();
+        executeSlashCommands('/cardgame end');
+      });
+    }
+    
+    // Initialize when DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        loadSettingsUI();
+        bindHandlers();
+      });
+    } else {
+      loadSettingsUI();
+      bindHandlers();
+    }
+  })();
+</script>

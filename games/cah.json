@@ -1,0 +1,102 @@
+{
+  "id": "cah",
+  "name": "Cards Against Humanity",
+  "description": "A party game for horrible people. Fill in the blank with the funniest answer!",
+  "version": "1.0.0",
+  "minPlayers": 2,
+  "maxPlayers": 8,
+  "mature": true,
+  
+  "deck": {
+    "type": "split",
+    "blackCards": [
+      { "id": "b1", "text": "What's that smell?", "pick": 1 },
+      { "id": "b2", "text": "I got 99 problems but ___ ain't one.", "pick": 1 },
+      { "id": "b3", "text": "What's the next Happy Meal toy?", "pick": 1 },
+      { "id": "b4", "text": "What ended my last relationship?", "pick": 1 },
+      { "id": "b5", "text": "___. That's how I want to die.", "pick": 1 },
+      { "id": "b6", "text": "Why am I sticky?", "pick": 1 },
+      { "id": "b7", "text": "What's my secret power?", "pick": 1 },
+      { "id": "b8", "text": "What never fails to liven up a party?", "pick": 1 },
+      { "id": "b9", "text": "What's the most emo?", "pick": 1 },
+      { "id": "b10", "text": "___ + ___ = ___.", "pick": 3 },
+      { "id": "b11", "text": "What's fun until it gets weird?", "pick": 1 },
+      { "id": "b12", "text": "What would grandma find disturbing, yet oddly charming?", "pick": 1 },
+      { "id": "b13", "text": "___: Good to the last drop.", "pick": 1 },
+      { "id": "b14", "text": "What's the gift that keeps on giving?", "pick": 1 },
+      { "id": "b15", "text": "In the new Disney movie, Hannah Montana struggles with ___ for the first time.", "pick": 1 }
+    ],
+    "whiteCards": [
+      { "id": "w1", "text": "A windmill full of corpses" },
+      { "id": "w2", "text": "Passive-aggressive Post-it notes" },
+      { "id": "w3", "text": "Being a motherfucking sorcerer" },
+      { "id": "w4", "text": "A micropig wearing a tiny raincoat and booties" },
+      { "id": "w5", "text": "Poorly timed Holocaust jokes" },
+      { "id": "w6", "text": "An endless stream of diarrhea" },
+      { "id": "w7", "text": "Getting naked and watching Nickelodeon" },
+      { "id": "w8", "text": "My collection of high-tech sex toys" },
+      { "id": "w9", "text": "A disappointing birthday party" },
+      { "id": "w10", "text": "Praying the gay away" },
+      { "id": "w11", "text": "Tentacle porn" },
+      { "id": "w12", "text": "Barack Obama" },
+      { "id": "w13", "text": "Hot Pockets" },
+      { "id": "w14", "text": "A Gypsy curse" },
+      { "id": "w15", "text": "The unstoppable march of time" },
+      { "id": "w16", "text": "Flavored condoms" },
+      { "id": "w17", "text": "Scientology" },
+      { "id": "w18", "text": "72 virgins" },
+      { "id": "w19", "text": "Alcoholism" },
+      { "id": "w20", "text": "A middle-aged man on roller blades" },
+      { "id": "w21", "text": "Charisma" },
+      { "id": "w22", "text": "Spontaneous human combustion" },
+      { "id": "w23", "text": "A robust mongoloid" },
+      { "id": "w24", "text": "Puppies!" },
+      { "id": "w25", "text": "Grandma" },
+      { "id": "w26", "text": "Flying sex snakes" },
+      { "id": "w27", "text": "Dying" },
+      { "id": "w28", "text": "Friendly fire" },
+      { "id": "w29", "text": "Two midgets shitting into a bucket" },
+      { "id": "w30", "text": "Being on fire" }
+    ]
+  },
+  
+  "rules": {
+    "initialWhiteCards": 10,
+    "cardsPerRound": 1,
+    "pointsToWin": 5,
+    "rotatingJudge": true,
+    
+    "phases": ["draw_black", "play_white", "judge", "score"],
+    
+    "judging": {
+      "anonymous": true,
+      "judgeCannotPlay": true
+    }
+  },
+  
+  "ui": {
+    "blackCardColor": "#1a1a1a",
+    "whiteCardColor": "#ffffff",
+    "textColorBlack": "#ffffff",
+    "textColorWhite": "#000000"
+  },
+  
+  "ai": {
+    "strategies": [
+      "Pick cards that create absurd or unexpected combinations",
+      "Consider the human's sense of humor",
+      "Sometimes the simplest answer is funniest",
+      "Dark humor often wins"
+    ],
+    "judging": {
+      "preferences": ["absurdist", "dark", "unexpected"],
+      "avoids": ["boring", "too_obvious"]
+    },
+    "responseStyle": {
+      "onPlay": ["*slides a card face-down*", "*stifles a laugh while playing*", "*plays with a poker face*"],
+      "onReveal": ["*bursts out laughing*", "*chokes on drink*", "*slow claps*", "Oh no... oh YES."],
+      "onWin": ["*bows dramatically*", "I am a terrible person.", "*accepts the black card proudly*"],
+      "onJudge": ["Hmm, let me see...", "*reads cards thoughtfully*", "These are all horrible. I love it."]
+    }
+  }
+}

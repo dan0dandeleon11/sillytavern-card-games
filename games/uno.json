@@ -1,0 +1,167 @@
+{
+  "id": "uno",
+  "name": "Uno",
+  "description": "Classic color and number matching card game. Be the first to empty your hand!",
+  "version": "1.0.0",
+  "minPlayers": 2,
+  "maxPlayers": 10,
+  
+  "deck": {
+    "type": "custom",
+    "cards": [
+      { "id": "red_0", "color": "red", "value": "0", "name": "Red 0", "count": 1 },
+      { "id": "red_1", "color": "red", "value": "1", "name": "Red 1", "count": 2 },
+      { "id": "red_2", "color": "red", "value": "2", "name": "Red 2", "count": 2 },
+      { "id": "red_3", "color": "red", "value": "3", "name": "Red 3", "count": 2 },
+      { "id": "red_4", "color": "red", "value": "4", "name": "Red 4", "count": 2 },
+      { "id": "red_5", "color": "red", "value": "5", "name": "Red 5", "count": 2 },
+      { "id": "red_6", "color": "red", "value": "6", "name": "Red 6", "count": 2 },
+      { "id": "red_7", "color": "red", "value": "7", "name": "Red 7", "count": 2 },
+      { "id": "red_8", "color": "red", "value": "8", "name": "Red 8", "count": 2 },
+      { "id": "red_9", "color": "red", "value": "9", "name": "Red 9", "count": 2 },
+      { "id": "red_skip", "color": "red", "value": "skip", "type": "action", "name": "Red Skip", "count": 2 },
+      { "id": "red_reverse", "color": "red", "value": "reverse", "type": "action", "name": "Red Reverse", "count": 2 },
+      { "id": "red_draw2", "color": "red", "value": "draw2", "type": "action", "name": "Red +2", "count": 2 },
+      
+      { "id": "yellow_0", "color": "yellow", "value": "0", "name": "Yellow 0", "count": 1 },
+      { "id": "yellow_1", "color": "yellow", "value": "1", "name": "Yellow 1", "count": 2 },
+      { "id": "yellow_2", "color": "yellow", "value": "2", "name": "Yellow 2", "count": 2 },
+      { "id": "yellow_3", "color": "yellow", "value": "3", "name": "Yellow 3", "count": 2 },
+      { "id": "yellow_4", "color": "yellow", "value": "4", "name": "Yellow 4", "count": 2 },
+      { "id": "yellow_5", "color": "yellow", "value": "5", "name": "Yellow 5", "count": 2 },
+      { "id": "yellow_6", "color": "yellow", "value": "6", "name": "Yellow 6", "count": 2 },
+      { "id": "yellow_7", "color": "yellow", "value": "7", "name": "Yellow 7", "count": 2 },
+      { "id": "yellow_8", "color": "yellow", "value": "8", "name": "Yellow 8", "count": 2 },
+      { "id": "yellow_9", "color": "yellow", "value": "9", "name": "Yellow 9", "count": 2 },
+      { "id": "yellow_skip", "color": "yellow", "value": "skip", "type": "action", "name": "Yellow Skip", "count": 2 },
+      { "id": "yellow_reverse", "color": "yellow", "value": "reverse", "type": "action", "name": "Yellow Reverse", "count": 2 },
+      { "id": "yellow_draw2", "color": "yellow", "value": "draw2", "type": "action", "name": "Yellow +2", "count": 2 },
+      
+      { "id": "green_0", "color": "green", "value": "0", "name": "Green 0", "count": 1 },
+      { "id": "green_1", "color": "green", "value": "1", "name": "Green 1", "count": 2 },
+      { "id": "green_2", "color": "green", "value": "2", "name": "Green 2", "count": 2 },
+      { "id": "green_3", "color": "green", "value": "3", "name": "Green 3", "count": 2 },
+      { "id": "green_4", "color": "green", "value": "4", "name": "Green 4", "count": 2 },
+      { "id": "green_5", "color": "green", "value": "5", "name": "Green 5", "count": 2 },
+      { "id": "green_6", "color": "green", "value": "6", "name": "Green 6", "count": 2 },
+      { "id": "green_7", "color": "green", "value": "7", "name": "Green 7", "count": 2 },
+      { "id": "green_8", "color": "green", "value": "8", "name": "Green 8", "count": 2 },
+      { "id": "green_9", "color": "green", "value": "9", "name": "Green 9", "count": 2 },
+      { "id": "green_skip", "color": "green", "value": "skip", "type": "action", "name": "Green Skip", "count": 2 },
+      { "id": "green_reverse", "color": "green", "value": "reverse", "type": "action", "name": "Green Reverse", "count": 2 },
+      { "id": "green_draw2", "color": "green", "value": "draw2", "type": "action", "name": "Green +2", "count": 2 },
+      
+      { "id": "blue_0", "color": "blue", "value": "0", "name": "Blue 0", "count": 1 },
+      { "id": "blue_1", "color": "blue", "value": "1", "name": "Blue 1", "count": 2 },
+      { "id": "blue_2", "color": "blue", "value": "2", "name": "Blue 2", "count": 2 },
+      { "id": "blue_3", "color": "blue", "value": "3", "name": "Blue 3", "count": 2 },
+      { "id": "blue_4", "color": "blue", "value": "4", "name": "Blue 4", "count": 2 },
+      { "id": "blue_5", "color": "blue", "value": "5", "name": "Blue 5", "count": 2 },
+      { "id": "blue_6", "color": "blue", "value": "6", "name": "Blue 6", "count": 2 },
+      { "id": "blue_7", "color": "blue", "value": "7", "name": "Blue 7", "count": 2 },
+      { "id": "blue_8", "color": "blue", "value": "8", "name": "Blue 8", "count": 2 },
+      { "id": "blue_9", "color": "blue", "value": "9", "name": "Blue 9", "count": 2 },
+      { "id": "blue_skip", "color": "blue", "value": "skip", "type": "action", "name": "Blue Skip", "count": 2 },
+      { "id": "blue_reverse", "color": "blue", "value": "reverse", "type": "action", "name": "Blue Reverse", "count": 2 },
+      { "id": "blue_draw2", "color": "blue", "value": "draw2", "type": "action", "name": "Blue +2", "count": 2 },
+      
+      { "id": "wild", "color": null, "value": "wild", "type": "wild", "name": "Wild", "count": 4 },
+      { "id": "wild_draw4", "color": null, "value": "wild_draw4", "type": "wild", "name": "Wild +4", "count": 4 }
+    ]
+  },
+  
+  "rules": {
+    "initialHand": 7,
+    "drawOnInvalid": true,
+    "drawEndsTurn": true,
+    "stackDrawCards": false,
+    "jumpIn": false,
+    
+    "validPlay": {
+      "conditions": ["colorMatch", "valueMatch", "wildCard", "activeColorMatch"],
+      "colorMatch": "card.color === topCard.color",
+      "valueMatch": "card.value === topCard.value",
+      "wildCard": "card.type === 'wild'",
+      "activeColorMatch": "card.color === activeColor"
+    },
+    
+    "cardEffects": {
+      "skip": { 
+        "action": "skipNextPlayer",
+        "description": "Next player loses their turn"
+      },
+      "reverse": { 
+        "action": "reverseDirection",
+        "description": "Reverses play direction"
+      },
+      "draw2": { 
+        "action": "nextPlayerDraws", 
+        "amount": 2,
+        "description": "Next player draws 2 and loses turn"
+      },
+      "wild": { 
+        "action": "chooseColor",
+        "description": "Choose any color to continue"
+      },
+      "wild_draw4": { 
+        "action": "chooseColor", 
+        "then": "nextPlayerDraws", 
+        "amount": 4,
+        "description": "Choose color and next player draws 4",
+        "challengeable": true
+      }
+    },
+    
+    "winCondition": "player.hand.length === 0",
+    
+    "unoCall": {
+      "trigger": "player.hand.length === 1",
+      "mustCall": true,
+      "penalty": {
+        "forgotToCall": "drawCards",
+        "amount": 2
+      }
+    },
+    
+    "scoring": {
+      "numberCards": "faceValue",
+      "actionCards": 20,
+      "wildCards": 50
+    }
+  },
+  
+  "ui": {
+    "cardColors": {
+      "red": "#ef4444",
+      "yellow": "#fbbf24",
+      "green": "#22c55e",
+      "blue": "#3b82f6",
+      "wild": "linear-gradient(135deg, #8b5cf6, #ec4899, #f59e0b, #22c55e)"
+    },
+    "specialActions": [
+      {
+        "id": "uno",
+        "label": "UNO!",
+        "trigger": "hand.length === 1",
+        "style": "danger"
+      }
+    ]
+  },
+  
+  "ai": {
+    "difficulty": "normal",
+    "strategies": [
+      "Play matching color/number when possible",
+      "Save wild cards for difficult situations",
+      "Use +2/+4 strategically when opponent is low on cards",
+      "Call UNO when appropriate"
+    ],
+    "responseStyle": {
+      "onPlay": ["*plays a {{card}}*", "*slaps down a {{card}}*", "*grins and plays {{card}}*"],
+      "onDraw": ["*draws a card from the pile*", "*reluctantly draws*", "*takes a card*"],
+      "onUno": ["UNO!", "*triumphantly* UNO!", "UNO! Just one card left~"],
+      "onWin": ["*wins with a flourish*", "That's the game!", "*celebrates*"],
+      "onLose": ["Good game!", "You got me this time!", "*gracefully accepts defeat*"]
+    }
+  }
+}

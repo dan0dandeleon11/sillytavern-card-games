@@ -1,0 +1,30 @@
+{
+  "name": "card-game-bridge-relay",
+  "version": "1.0.0",
+  "description": "WebSocket relay server for connecting browser card games to SillyTavern AI companions",
+  "main": "relay-server.js",
+  "scripts": {
+    "start": "node relay-server.js",
+    "dev": "DEBUG=true node relay-server.js",
+    "start:ollama": "AI_SUMMARIZER_URL=http://localhost:11434/api/generate node relay-server.js"
+  },
+  "keywords": [
+    "sillytavern",
+    "card-games",
+    "websocket",
+    "relay",
+    "ai-companion"
+  ],
+  "author": "Lei & Caleb",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "ws": "^8.16.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/sillytavern-card-games"
+  }
+}

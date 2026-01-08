@@ -1,0 +1,14 @@
+{
+  "display_name": "Card Games",
+  "loading_order": 100,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "Lei & Caleb",
+  "version": "0.1.0",
+  "homePage": "https://github.com/yourusername/sillytavern-card-games",
+  "auto_update": true,
+  "generate_interceptor": "cardGamePromptInterceptor",
+  "description": "Play card games (Uno, CAH, Exploding Kittens) with your AI companions"
+}
