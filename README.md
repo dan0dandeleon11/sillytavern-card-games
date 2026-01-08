@@ -184,7 +184,7 @@ Supports: Werewolf, Mafia, Secret Hitler, Avalon, Spyfall, Blood on the Clocktow
 
 ## 🤝 Credits
 
-- **Authors**: Lei & Caleb
+- **Authors**: Dan & Caleb
 - **Inspired by**: RPG Companion, SillyTavern-Tracker
 - **License**: AGPL-3.0
 
